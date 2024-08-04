@@ -1,0 +1,21 @@
+<section class="organizations">
+  <header>
+    <mat-paginator
+      [length]="organizations.length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[10, 20, 50]"
+      (page)="onPageChange($event)"
+      class="paginator"
+    >
+    </mat-paginator>
+  </header>
+  <main>
+    @for( organization of pagedOrganizations; track organization) {
+    <section class="card" (click)="onOrganizationClick(organization)">
+      <img src="../../../../assets/default.png" alt="" />
+      <h2>{{ organization.fantasyName }}</h2>
+      <h3>{{ organization.typeOrganization }}</h3>
+    </section>
+    }
+  </main>
+</section>

@@ -1,47 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatStepperModule } from '@angular/material/stepper';
-import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
+import { OrganizationService } from '../../../@core/services/organization/organization.service';
+import { ActivatedRoute } from '@angular/router';
 import { FieldConfig } from '../../../@core/Interfaces/field-config.interface';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ButtonComponent } from '../../../@core/components/button/button.component';
 import { TextFieldComponent } from '../../../@core/components/text-field/text-field.component';
 import { DateFieldComponent } from '../../../@core/components/date-field/date-field.component';
 import { RadioFieldComponent } from '../../../@core/components/radio-field/radio-field.component';
-import { ButtonComponent } from '../../../@core/components/button/button.component';
-import { OrganizationService } from '../../../@core/services/organization/organization.service';
-import { AlertService } from '../../../@core/services/alert/alert.service';
-import { UserService } from '../../../@core/services/user/user.service';
-import { User } from '../../../@core/Interfaces/user.interface';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'vox-form-stepper',
+  selector: 'vox-edit-company',
   standalone: true,
   imports: [
-    MatStepperModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    CommonModule,
     ButtonComponent,
     TextFieldComponent,
     DateFieldComponent,
     RadioFieldComponent,
+    CommonModule,
+    MatIconModule,
   ],
-  templateUrl: './form-stepper.component.html',
-  styleUrls: ['./form-stepper.component.scss'],
+  templateUrl: './edit-company.component.html',
+  styleUrl: './edit-company.component.scss',
 })
-export class FormStepperComponent implements OnInit {
+export class EditCompanyComponent implements OnInit {
+  organizationId: number | null = null;
   userDateForm: FormGroup = new FormGroup({});
   companyDateForm: FormGroup = new FormGroup({});
+
   userFieldConfigs: FieldConfig[] = [
     {
       type: 'text',
@@ -62,6 +49,7 @@ export class FormStepperComponent implements OnInit {
       validators: [Validators.required],
     },
   ];
+
   companyFieldConfigs: FieldConfig[] = [
     {
       type: 'text',
@@ -86,28 +74,35 @@ export class FormStepperComponent implements OnInit {
       validators: [Validators.required],
     },
   ];
-  userLogged: User | null = null;
 
   constructor(
-    private fb: FormBuilder,
     private organizationService: OrganizationService,
-    private alert: AlertService,
-    private userService: UserService,
-    private router: Router
+    private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
   ) {
     this.userDateForm = this.fb.group({
       userId: [''],
+      name: ['', Validators.required],
+      cpf: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
     });
-    this.companyDateForm = this.fb.group({});
+
+    this.companyDateForm = this.fb.group({
+      fantasyName: ['', Validators.required],
+      registerEntity: ['', Validators.required],
+      typeOrganization: ['', Validators.required],
+      cnpj: [''],
+      uf: [''],
+    });
   }
 
   ngOnInit(): void {
-    this.userFieldConfigs.forEach((field) => {
-      this.userDateForm.addControl(
-        field.name,
-        this.fb.control(field.value || '', field.validators || [])
-      );
-    });
+    const fullUrl = window.location.href;
+    const urlSegments = fullUrl.split('/');
+    const idSegment = urlSegments[urlSegments.length - 1];
+    this.organizationId = +idSegment;
+    this.getOrganizationById();
+
     this.companyFieldConfigs.forEach((field) => {
       this.companyDateForm.addControl(
         field.name,
@@ -124,8 +119,6 @@ export class FormStepperComponent implements OnInit {
       ?.valueChanges.subscribe((value) => {
         this.updateConditionalFields(value);
       });
-
-    this.getUser();
   }
 
   updateConditionalFields(value: string) {
@@ -160,33 +153,32 @@ export class FormStepperComponent implements OnInit {
     }
   }
 
-  getFormValues() {
-    return {
-      ...this.userDateForm.value,
-      ...this.companyDateForm.value,
-    };
+  getOrganizationById() {
+    if (this.organizationId) {
+      this.organizationService
+        .getOrganizationById(this.organizationId)
+        .subscribe((organization) => {
+          console.log(organization);
+
+          // Populando os formulários com os dados recebidos
+          this.userDateForm.patchValue({
+            userId: organization.userId,
+            name: organization.name,
+            cpf: organization.cpf,
+            dateOfBirth: organization.dateOfBirth,
+          });
+
+          this.companyDateForm.patchValue({
+            fantasyName: organization.fantasyName,
+            registerEntity: organization.registerEntity,
+            typeOrganization: organization.typeOrganization,
+            cnpj: organization.cnpj,
+            uf: organization.uf,
+          });
+        });
+    }
   }
-
-  getUser() {
-    this.userService.getLoggedUser().subscribe({
-      next: (user) => {
-        this.userLogged = user;
-      },
-    });
-  }
-
-  createOrganization() {
-    this.userDateForm.patchValue({
-      userId: this.userLogged?.id,
-    });
-
-    this.organizationService
-      .createOrganization(this.getFormValues())
-      .subscribe({
-        next: () => {
-          this.alert.showAlert('Sua organização foi criada com sucesso!');
-          this.router.navigateByUrl('/register-company');
-        },
-      });
+  goBack() {
+    window.history.back();
   }
 }

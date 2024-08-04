@@ -1,4 +1,5 @@
 <section class="register-company">
+  @if(actualRoute !== '/register-company/form-stepper'){
   <header>
     <vox-search-bar (search)="onSearch($event)"></vox-search-bar>
     <vox-button
@@ -8,17 +9,29 @@
       (onClickEvent)="createOrganization()"
     ></vox-button>
   </header>
+  }
+
   <main>
-    @if(!isNotExistOrganization){
-    <h1>Nenhuma empresa cadastrada ainda.</h1>
-    <h3>
-      Por favor, clique em cadastrar nova empresa para iniciar o processo.
-    </h3>
+    @if(actualRoute === '/register-company'){ @if(organizations.length === 0){
+    <section class="not-found">
+      <h1>Nenhuma empresa cadastrada ainda.</h1>
+      <h3>
+        Por favor, clique em cadastrar nova empresa para iniciar o processo.
+      </h3>
+    </section>
     }@else{
+    <section class="organizations-list">
+      <vox-organizations-list
+        [organizations]="organizations"
+      ></vox-organizations-list>
+    </section>
+    } }@else if( actualRoute === '/register-company/form-stepper'){
     <section>
       <h1>Preencha seus dados.</h1>
       <vox-form-stepper></vox-form-stepper>
     </section>
+    }@else {
+    <vox-edit-company></vox-edit-company>
     }
   </main>
 </section>
