@@ -1,4 +1,5 @@
 <div [formGroup]="form">
+  <h3>{{ config.label }}</h3>
   <mat-form-field class="example-full-width" appearance="outline" class="input">
     <mat-label>Data</mat-label>
     <input
@@ -10,5 +11,8 @@
     <mat-hint>DD/MM/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
+    @if( config.validators){
+    <mat-error>Campo obrigatório</mat-error>
+    }
   </mat-form-field>
 </div>

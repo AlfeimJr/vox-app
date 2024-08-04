@@ -1,6 +1,10 @@
 <div [formGroup]="form">
+  <h3>{{ config.label }}</h3>
   <mat-form-field appearance="outline" class="input">
     <mat-label>{{ config.label }}</mat-label>
     <input matInput [formControlName]="config.name" [value]="value" />
+    @if( config.validators){
+    <mat-error>Campo obrigatório</mat-error>
+    }
   </mat-form-field>
 </div>

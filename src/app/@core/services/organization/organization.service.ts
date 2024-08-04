@@ -25,4 +25,14 @@ export class OrganizationService {
       `${this.apiUrl}/organization/${id}`
     );
   }
+
+  patchOrganizationById(id: number, organization: Organization) {
+    let Organization: Organization = { ...organization, id: Number(id) };
+    return this.httpClient.put<Organization>(
+      `${this.apiUrl}/organization/${id}`,
+      {
+        ...Organization,
+      }
+    );
+  }
 }

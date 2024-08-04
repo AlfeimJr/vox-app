@@ -5,9 +5,15 @@ import {
   MatCalendarCellClassFunction,
   MatDatepickerModule,
 } from '@angular/material/datepicker';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  provideNativeDateAdapter,
+} from '@angular/material/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CustomDateAdapter } from './custom-date-adapter';
+import { MY_DATE_FORMATS } from './date-format';
 @Component({
   selector: 'vox-date-field',
   standalone: true,
@@ -19,7 +25,10 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
   ],
   templateUrl: './date-field.component.html',
-  providers: [provideNativeDateAdapter()],
+  providers: [
+    { provide: DateAdapter, useClass: CustomDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+  ],
   styleUrl: './date-field.component.scss',
 })
 export class DateFieldComponent {

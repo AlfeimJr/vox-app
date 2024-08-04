@@ -1,5 +1,10 @@
 <div [formGroup]="form">
-  <mat-radio-group [formControlName]="config.name" class="input">
+  <h3>{{ config.label }}</h3>
+  <mat-radio-group
+    [formControlName]="config.name"
+    class="input"
+    color="primary"
+  >
     <mat-radio-button
       *ngFor="let option of config.options"
       [value]="option.value"

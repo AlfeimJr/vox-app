@@ -1,9 +1,14 @@
 <mat-toolbar color="white">
   <div class="logo-container">
-    <span class="logo-text">Logoipsum</span>
+    <a class="logo-text" href="/register-company">Logoipsum</a>
   </div>
   <span class="spacer"></span>
-  <button mat-icon-button>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>account_circle</mat-icon>
   </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="logout()">
+      <span>Deslogar</span>
+    </button>
+  </mat-menu>
 </mat-toolbar>

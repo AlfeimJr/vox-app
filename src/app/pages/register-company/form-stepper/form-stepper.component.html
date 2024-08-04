@@ -157,6 +157,7 @@
         color="primary"
         size="large"
         text="Concluir cadastro"
+        [disabled]="!userDateForm.valid || !companyDateForm.valid"
         (onClickEvent)="createOrganization()"
       ></vox-button>
     </div>

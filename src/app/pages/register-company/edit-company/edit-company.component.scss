@@ -3,8 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 16px;
   gap: 16px;
+  padding: 16px;
   height: 100%;
   header {
     width: 100%;
@@ -36,23 +36,33 @@
   main {
     display: flex;
     justify-content: space-between;
-    width: 50vw;
+    width: 985px;
+    flex-direction: column;
     gap: 1rem;
-    padding: 1rem;
     border: 1px solid #d5d5d5;
     border-radius: 4px;
     background-color: white;
-    .user-inputs {
-      width: 50%;
+    .inputs {
+      display: flex;
+      gap: 1rem;
+      .user-inputs {
+        width: 50%;
+        padding: 1rem;
+      }
+
+      .company-inputs {
+        width: 50%;
+        width: 50%;
+        height: 500px;
+        overflow-y: auto;
+        padding: 1rem;
+      }
     }
 
-    .company-inputs {
-      width: 50%;
-
-      .buttons {
-        display: flex;
-        justify-content: space-between;
-      }
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+      padding: 5px 1rem;
     }
   }
 }

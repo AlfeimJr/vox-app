@@ -9,6 +9,7 @@ import { DateFieldComponent } from '../../../@core/components/date-field/date-fi
 import { RadioFieldComponent } from '../../../@core/components/radio-field/radio-field.component';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { AlertService } from '../../../@core/services/alert/alert.service';
 
 @Component({
   selector: 'vox-edit-company',
@@ -78,7 +79,8 @@ export class EditCompanyComponent implements OnInit {
   constructor(
     private organizationService: OrganizationService,
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private alert: AlertService
   ) {
     this.userDateForm = this.fb.group({
       userId: [''],
@@ -180,5 +182,24 @@ export class EditCompanyComponent implements OnInit {
   }
   goBack() {
     window.history.back();
+  }
+
+  getFormValues() {
+    return {
+      ...this.userDateForm.value,
+      ...this.companyDateForm.value,
+    };
+  }
+  editOrganization() {
+    this.organizationService
+      .patchOrganizationById(
+        this.organizationId as number,
+        this.getFormValues()
+      )
+      .subscribe({
+        next: () => {
+          this.alert.showAlert('Dados salvos com sucesso!');
+        },
+      });
   }
 }
