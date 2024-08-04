@@ -1,6 +1,11 @@
 <div class="search-bar">
-  <input type="text" [(ngModel)]="searchQuery" placeholder="Pesquisar" />
-  <button (click)="onSearch()">
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    (ngModelChange)="onSearch()"
+    placeholder="Pesquisar"
+  />
+  <button>
     <span class="search-icon">🔍</span>
   </button>
 </div>

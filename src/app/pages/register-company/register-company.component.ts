@@ -46,7 +46,11 @@ export class RegisterCompanyComponent implements OnInit {
   }
 
   onSearch(query: string) {
-    console.log('Search query:', query);
+    this.organizations = this.organizations.filter((organization) => {
+      return organization.fantasyName
+        .toLowerCase()
+        .includes(query.toLowerCase());
+    });
   }
 
   createOrganization() {

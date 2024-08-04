@@ -23,6 +23,7 @@
           color="primary"
           size="large"
           text="Próximo"
+          [disabled]="!userDateForm.valid"
           (onClickEvent)="stepper.next()"
         ></vox-button>
       </div>
@@ -31,7 +32,7 @@
   <mat-step>
     <form>
       <ng-template matStepLabel>Dados da sua empresa</ng-template>
-      <section>
+      <section class="company-inputs">
         @for( companyFieldConfig of companyFieldConfigs; track
         companyFieldConfig){
         <ng-container [ngSwitch]="companyFieldConfig.type">
@@ -77,6 +78,7 @@
           color="primary"
           size="large"
           text="Próximo"
+          [disabled]="!companyDateForm.valid"
           (onClickEvent)="stepper.next()"
         ></vox-button>
       </div>
