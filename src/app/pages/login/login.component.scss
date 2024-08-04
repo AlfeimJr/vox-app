@@ -1,0 +1,135 @@
+.content {
+  height: 100vh;
+  background-color: #f5f5f5;
+
+  .login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 50%;
+    margin: auto;
+    gap: 5rem;
+
+    main {
+      h1 {
+        font-size: 72px;
+      }
+    }
+
+    footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #d9d9d9;
+      border-radius: 4px;
+      padding: 1rem;
+      background: white;
+
+      .login-inputs {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        form {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 1rem;
+          width: 100%;
+
+          > div {
+            width: 100%;
+
+            .input {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .content {
+    .login {
+      width: 80%;
+      height: 70%;
+      gap: 3rem;
+
+      main {
+        h1 {
+          font-size: 48px;
+        }
+      }
+
+      footer {
+        padding: 1rem;
+
+        .login-inputs {
+          form {
+            gap: 1rem;
+
+            > div {
+              width: 100%;
+
+              .input {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Responsividade para telas muito pequenas (celulares) */
+@media (max-width: 1547px) {
+  .content {
+    .login {
+      width: 90%;
+      height: 80%;
+      gap: 2rem;
+
+      main {
+        h1 {
+          font-size: 36px;
+        }
+      }
+
+      footer {
+        padding: 1rem;
+
+        .login-inputs {
+          form {
+            gap: 0.5rem;
+
+            > div {
+              width: 100%;
+
+              .input {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 727px) {
+  footer {
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+  }
+}

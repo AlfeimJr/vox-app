@@ -1,0 +1,62 @@
+<section class="content">
+  <section class="login">
+    <header></header>
+    <main>
+      <h1>Entre com o seu usuário</h1>
+    </main>
+    <footer>
+      <section class="login-inputs">
+        <form class="form" [formGroup]="registerForm">
+          @for (credential of credentials.controls; track credential; ) {
+          <div formArrayName="credentials">
+            <div [formGroupName]="$index">
+              <p>Seu email</p>
+              <mat-form-field class="input" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input
+                  type="email"
+                  matInput
+                  formControlName="email"
+                  [errorStateMatcher]="matcher"
+                  placeholder="Ex. pat@example.com"
+                />
+                @if( credential.get('email')?.hasError('email') &&
+                !credential.get('email')?.hasError('required')){
+                <mat-error>Digite um email valido!</mat-error>
+                } @if(credential.get('email')?.hasError('required')){
+                <mat-error>Campo <strong>obrigatório</strong></mat-error>
+                }
+              </mat-form-field>
+
+              <p>Sua senha</p>
+              <mat-form-field class="input" appearance="outline">
+                <mat-label>Senha</mat-label>
+                <input type="password" matInput formControlName="password" />
+                @if(credential.get('password')?.hasError('minlength') &&
+                !credential.get('password')?.hasError('required')){
+                <mat-error>Digite uma senha valida!</mat-error>
+                } @if(credential.get('email')?.hasError('required')){
+                <mat-error>Campo <strong>obrigatório</strong></mat-error>
+                }
+              </mat-form-field>
+            </div>
+          </div>
+          }
+
+          <section class="buttons">
+            @for (button of buttonsPropertys; track button) {
+            <vox-button
+              [text]="button.text"
+              [size]="button.size"
+              [color]="button.color"
+              [disabled]="button.disabled"
+              (onClickEvent)="buttonClick($index)"
+            ></vox-button>
+            }
+          </section>
+        </form>
+      </section>
+    </footer>
+  </section>
+</section>
+<span class="example-pizza-party" matSnackBarLabel> Pizza party!!! </span>

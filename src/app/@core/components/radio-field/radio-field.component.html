@@ -1,0 +1,11 @@
+<div [formGroup]="form">
+  <mat-radio-group [formControlName]="config.name" class="input">
+    <mat-radio-button
+      *ngFor="let option of config.options"
+      [value]="option.value"
+      [checked]="value === option.value"
+    >
+      {{ option.label }}
+    </mat-radio-button>
+  </mat-radio-group>
+</div>

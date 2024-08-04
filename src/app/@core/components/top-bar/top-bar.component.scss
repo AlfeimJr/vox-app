@@ -1,0 +1,34 @@
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid #d9d9d9;
+  .logo-container {
+    display: flex;
+    align-items: center;
+
+    .logo {
+      height: 40px;
+      margin-right: 8px;
+    }
+
+    .logo-text {
+      font-size: 24px;
+      font-weight: bold;
+      color: #007bff;
+    }
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  button {
+    background-color: #f3e9ff;
+    border-radius: 50%;
+
+    mat-icon {
+      color: #6200ea;
+    }
+  }
+}

@@ -1,0 +1,163 @@
+<mat-stepper linear #stepper class="stepper-register">
+  <mat-step>
+    <form [formGroup]="userDateForm">
+      <ng-template matStepLabel>Seus dados</ng-template>
+      <section class="user-inputs">
+        @for( userFieldConfig of userFieldConfigs; track userFieldConfig){
+        <ng-container [ngSwitch]="userFieldConfig.type">
+          <vox-text-field
+            *ngSwitchCase="'text'"
+            [config]="userFieldConfig"
+            [form]="userDateForm"
+          ></vox-text-field>
+          <vox-date-field
+            *ngSwitchCase="'date'"
+            [config]="userFieldConfig"
+            [form]="userDateForm"
+          ></vox-date-field>
+        </ng-container>
+        }
+      </section>
+      <div class="button-init">
+        <vox-button
+          color="primary"
+          size="large"
+          text="Próximo"
+          (onClickEvent)="stepper.next()"
+        ></vox-button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <form>
+      <ng-template matStepLabel>Dados da sua empresa</ng-template>
+      <section>
+        @for( companyFieldConfig of companyFieldConfigs; track
+        companyFieldConfig){
+        <ng-container [ngSwitch]="companyFieldConfig.type">
+          <vox-text-field
+            *ngSwitchCase="'text'"
+            [config]="companyFieldConfig"
+            [form]="companyDateForm"
+          ></vox-text-field>
+          <vox-date-field
+            *ngSwitchCase="'date'"
+            [config]="companyFieldConfig"
+            [form]="companyDateForm"
+          ></vox-date-field>
+          <vox-radio-field
+            *ngSwitchCase="'radio'"
+            [config]="companyFieldConfig"
+            [form]="companyDateForm"
+          ></vox-radio-field>
+        </ng-container>
+
+        }
+        <ng-container *ngIf="companyDateForm.contains('cnpj')">
+          <vox-text-field
+            [config]="{ type: 'text', name: 'cnpj', label: 'CNPJ da matriz' }"
+            [form]="companyDateForm"
+          ></vox-text-field>
+        </ng-container>
+        <ng-container *ngIf="companyDateForm.contains('uf')">
+          <vox-text-field
+            [config]="{ type: 'text', name: 'uf', label: 'UF da matriz' }"
+            [form]="companyDateForm"
+          ></vox-text-field>
+        </ng-container>
+      </section>
+      <div class="buttons">
+        <vox-button
+          color="secondary"
+          size="large"
+          text="Voltar"
+          (onClickEvent)="stepper.previous()"
+        ></vox-button>
+        <vox-button
+          color="primary"
+          size="large"
+          text="Próximo"
+          (onClickEvent)="stepper.next()"
+        ></vox-button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Conclusão</ng-template>
+    <section class="confirm">
+      <section class="user-inputs-confirm">
+        <h1>Seus dados</h1>
+        @for( userFieldConfig of userFieldConfigs; track userFieldConfig){
+        <ng-container [ngSwitch]="userFieldConfig.type">
+          <vox-text-field
+            *ngSwitchCase="'text'"
+            [config]="userFieldConfig"
+            [form]="userDateForm"
+            [value]="userDateForm.get(userFieldConfig.name)?.value"
+          ></vox-text-field>
+          <vox-date-field
+            *ngSwitchCase="'date'"
+            [config]="userFieldConfig"
+            [form]="userDateForm"
+            [value]="userDateForm.get(userFieldConfig.name)?.value"
+          ></vox-date-field>
+        </ng-container>
+        }
+      </section>
+      <section class="company-inputs-confirm">
+        <h1>Dados da sua empresa</h1>
+        @for( companyFieldConfig of companyFieldConfigs; track
+        companyFieldConfig){
+        <ng-container [ngSwitch]="companyFieldConfig.type">
+          <vox-text-field
+            *ngSwitchCase="'text'"
+            [config]="companyFieldConfig"
+            [form]="companyDateForm"
+            [value]="companyDateForm.get(companyFieldConfig.name)?.value"
+          ></vox-text-field>
+          <vox-date-field
+            *ngSwitchCase="'date'"
+            [config]="companyFieldConfig"
+            [form]="companyDateForm"
+            [value]="companyDateForm.get(companyFieldConfig.name)?.value"
+          ></vox-date-field>
+          <vox-radio-field
+            *ngSwitchCase="'radio'"
+            [config]="companyFieldConfig"
+            [form]="companyDateForm"
+            [value]="companyDateForm.get(companyFieldConfig.name)?.value"
+          ></vox-radio-field>
+        </ng-container>
+
+        }
+        <ng-container *ngIf="companyDateForm.contains('cnpj')">
+          <vox-text-field
+            [config]="{ type: 'text', name: 'cnpj', label: 'CNPJ da matriz' }"
+            [form]="companyDateForm"
+            [value]="companyDateForm.get('cnpj')?.value"
+          ></vox-text-field>
+        </ng-container>
+        <ng-container *ngIf="companyDateForm.contains('uf')">
+          <vox-text-field
+            [config]="{ type: 'text', name: 'uf', label: 'UF da matriz' }"
+            [form]="companyDateForm"
+            [value]="companyDateForm.get('uf')?.value"
+          ></vox-text-field>
+        </ng-container>
+      </section>
+    </section>
+    <div class="buttons">
+      <vox-button
+        color="secondary"
+        size="large"
+        text="Voltar"
+        (onClickEvent)="stepper.previous()"
+      ></vox-button>
+      <vox-button
+        color="primary"
+        size="large"
+        text="Concluir cadastro"
+      ></vox-button>
+    </div>
+  </mat-step>
+</mat-stepper>

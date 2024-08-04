@@ -1,0 +1,14 @@
+<div [formGroup]="form">
+  <mat-form-field class="example-full-width" appearance="outline" class="input">
+    <mat-label>Data</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      [formControlName]="config.name"
+      [value]="value"
+    />
+    <mat-hint>DD/MM/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>

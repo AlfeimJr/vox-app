@@ -1,0 +1,24 @@
+<section class="register-company">
+  <header>
+    <vox-search-bar (search)="onSearch($event)"></vox-search-bar>
+    <vox-button
+      color="primary"
+      size="large"
+      text="Cadastrar nova empresa"
+      (onClickEvent)="createOrganization()"
+    ></vox-button>
+  </header>
+  <main>
+    @if(!isNotExistOrganization){
+    <h1>Nenhuma empresa cadastrada ainda.</h1>
+    <h3>
+      Por favor, clique em cadastrar nova empresa para iniciar o processo.
+    </h3>
+    }@else{
+    <section>
+      <h1>Preencha seus dados.</h1>
+      <vox-form-stepper></vox-form-stepper>
+    </section>
+    }
+  </main>
+</section>

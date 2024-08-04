@@ -1,0 +1,45 @@
+button {
+  &.primary {
+    background-color: #000000;
+    color: white;
+  }
+
+  &.secondary {
+    background-color: transparent;
+    color: black;
+    border: none;
+  }
+
+  &.success {
+    background-color: green;
+    color: white;
+  }
+
+  &.danger {
+    background-color: red;
+    color: white;
+  }
+
+  &.small {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  &.medium {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  &.large {
+    padding: 5px;
+    font-size: 14px;
+    width: 310px;
+    border-radius: 4px;
+  }
+
+  &:disabled {
+    background-color: lightgray;
+    color: darkgray;
+    cursor: not-allowed;
+  }
+}

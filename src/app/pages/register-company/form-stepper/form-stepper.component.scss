@@ -1,0 +1,42 @@
+.user-inputs {
+  padding: 10px 0;
+}
+.confirm {
+  display: flex;
+  justify-content: space-between;
+  .user-inputs-confirm {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .company-inputs-confirm {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+.stepper-register {
+  background-color: #f5f5f5;
+
+  ::ng-deep {
+    .mat-horizontal-content-container {
+      background-color: white;
+      border: 1px solid #d9d9d9;
+    }
+    .mat-horizontal-content-container {
+      padding: 24px !important;
+    }
+  }
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.button-init {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
