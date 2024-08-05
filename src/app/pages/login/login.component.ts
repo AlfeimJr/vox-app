@@ -15,10 +15,9 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { ButtonComponent } from '../../@core/components/button/button.component';
 import { AuthService } from '../../@core/services/auth/auth.service';
 import { Router } from '@angular/router';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AlertService } from '../../@core/services/alert/alert.service';
 import { AlertComponent } from '../../@core/components/alert/alert.component';
-import { Subscription } from 'rxjs';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -71,12 +70,10 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   error = '';
-  private subscription: Subscription = new Subscription();
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private _snackBar: MatSnackBar,
     private alertService: AlertService
   ) {
     this.registerForm = this.fb.group({
@@ -85,7 +82,12 @@ export class LoginComponent implements OnInit {
     this.addCredentials();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const currentUser = this.authService.currentUserValue;
+    if (currentUser) {
+      this.router.navigate(['/']);
+    }
+  }
 
   get credentials(): FormArray {
     return this.registerForm.get('credentials') as FormArray;

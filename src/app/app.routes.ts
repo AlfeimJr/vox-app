@@ -10,6 +10,11 @@ export const routes: Routes = [
     component: LoginComponent,
   },
   {
+    path: '',
+    redirectTo: 'register-company',
+    pathMatch: 'full',
+  },
+  {
     path: 'register-company',
     component: RegisterCompanyComponent,
     canActivate: [AuthGuard],
