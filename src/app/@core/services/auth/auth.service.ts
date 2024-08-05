@@ -50,7 +50,7 @@ export class AuthService implements OnInit {
   }
 
   register(user: User) {
-    return this.http.post<any>(`${this.apiUrl}/user`, user);
+    return this.http.post<any>(`${this.apiUrl}/user/create`, user);
   }
 
   logout() {

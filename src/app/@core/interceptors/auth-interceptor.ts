@@ -8,6 +8,9 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   if (req.url.includes('/login')) {
     return next(req);
   }
+  if (req.url.includes('/user/create')) {
+    return next(req);
+  }
   const authService = inject(AuthService);
   const router = inject(Router);
   const token = authService.currentUserValue.token;
