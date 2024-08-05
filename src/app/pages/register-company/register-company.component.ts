@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SearchBarComponent } from '../../@core/components/search-bar/search-bar.component';
 import { ButtonComponent } from '../../@core/components/button/button.component';
 import { FormStepperComponent } from './form-stepper/form-stepper.component';
@@ -7,10 +7,8 @@ import { filter } from 'rxjs';
 import { Organization } from '../../@core/Interfaces/organization.interface';
 import { OrganizationService } from '../../@core/services/organization/organization.service';
 import { OrganizationsListComponent } from './organizations-list/organizations-list.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BrowserModule } from '@angular/platform-browser';
 import { EditCompanyComponent } from './edit-company/edit-company.component';
+import { TitleService } from '../../@core/services/title/title.service';
 
 @Component({
   selector: 'app-register-company',
@@ -33,7 +31,8 @@ export class RegisterCompanyComponent implements OnInit {
   constructor(
     private route: Router,
     private activatedRoute: ActivatedRoute,
-    private organizationService: OrganizationService
+    private organizationService: OrganizationService,
+    private titleService: TitleService
   ) {}
 
   ngOnInit(): void {
@@ -44,6 +43,7 @@ export class RegisterCompanyComponent implements OnInit {
       });
 
     this.logCurrentRoute();
+    this.titleService.initializeTitleWatcher();
   }
 
   onSearch(query: string) {

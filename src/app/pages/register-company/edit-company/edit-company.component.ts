@@ -10,6 +10,7 @@ import { RadioFieldComponent } from '../../../@core/components/radio-field/radio
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { AlertService } from '../../../@core/services/alert/alert.service';
+import { TitleService } from '../../../@core/services/title/title.service';
 
 @Component({
   selector: 'vox-edit-company',
@@ -80,7 +81,8 @@ export class EditCompanyComponent implements OnInit {
     private organizationService: OrganizationService,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private alert: AlertService
+    private alert: AlertService,
+    private titleService: TitleService
   ) {
     this.userDateForm = this.fb.group({
       userId: [''],
@@ -121,6 +123,8 @@ export class EditCompanyComponent implements OnInit {
       ?.valueChanges.subscribe((value) => {
         this.updateConditionalFields(value);
       });
+
+    this.titleService.initializeTitleWatcher();
   }
 
   updateConditionalFields(value: string) {

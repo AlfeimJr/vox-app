@@ -20,6 +20,7 @@ import { AlertService } from '../../../@core/services/alert/alert.service';
 import { UserService } from '../../../@core/services/user/user.service';
 import { User } from '../../../@core/Interfaces/user.interface';
 import { Router } from '@angular/router';
+import { TitleService } from '../../../@core/services/title/title.service';
 
 @Component({
   selector: 'vox-form-stepper',
@@ -93,7 +94,8 @@ export class FormStepperComponent implements OnInit {
     private organizationService: OrganizationService,
     private alert: AlertService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private titleService: TitleService
   ) {
     this.userDateForm = this.fb.group({
       userId: [''],
@@ -126,6 +128,8 @@ export class FormStepperComponent implements OnInit {
       });
 
     this.getUser();
+
+    this.titleService.initializeTitleWatcher();
   }
 
   updateConditionalFields(value: string) {

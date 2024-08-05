@@ -118,6 +118,7 @@ export class LoginComponent implements OnInit {
       },
       error: (error) => {
         this.error = error;
+        this.alertService.showAlert(`Usuário ou senha inválidos`);
         this.loading = false;
       },
     });

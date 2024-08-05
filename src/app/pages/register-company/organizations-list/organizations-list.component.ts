@@ -5,8 +5,6 @@ import {
   MatPaginatorModule,
   PageEvent,
 } from '@angular/material/paginator';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorIntlPtBr } from '../../../@core/class/mat-paginator-intl.class';
 import { Router } from '@angular/router';
 

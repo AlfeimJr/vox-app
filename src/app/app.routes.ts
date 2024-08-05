@@ -13,11 +13,17 @@ export const routes: Routes = [
     path: 'register-company',
     component: RegisterCompanyComponent,
     canActivate: [AuthGuard],
+    data: { title: 'Lista de empresas' },
     children: [
-      { path: 'form-stepper', component: RegisterCompanyComponent },
+      {
+        path: 'form-stepper',
+        component: RegisterCompanyComponent,
+        data: { title: 'Cadastrar empresa' },
+      },
       {
         path: 'edit-company/:id',
         component: EditCompanyComponent,
+        data: { title: 'Editar empresa' },
       },
     ],
   },
