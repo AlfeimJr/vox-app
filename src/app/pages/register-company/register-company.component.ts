@@ -29,6 +29,7 @@ export class RegisterCompanyComponent implements OnInit {
   isNotExistOrganization: boolean = false;
   organizations: Organization[] = [];
   actualRoute: string = '';
+  organizationsBackup: Organization[] = [];
   constructor(
     private route: Router,
     private activatedRoute: ActivatedRoute,
@@ -46,7 +47,7 @@ export class RegisterCompanyComponent implements OnInit {
   }
 
   onSearch(query: string) {
-    this.organizations = this.organizations.filter((organization) => {
+    this.organizations = this.organizationsBackup.filter((organization) => {
       return organization.fantasyName
         .toLowerCase()
         .includes(query.toLowerCase());
@@ -61,6 +62,7 @@ export class RegisterCompanyComponent implements OnInit {
   getAllOrganizations() {
     this.organizationService.getAllOrganization().subscribe((organizations) => {
       this.organizations = organizations;
+      this.organizationsBackup = organizations;
     });
   }
 

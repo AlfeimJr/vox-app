@@ -5,11 +5,18 @@ import { TopBarComponent } from './@core/components/top-bar/top-bar.component';
 import { AuthService } from './@core/services/auth/auth.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { LoginComponent } from './pages/login/login.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HttpClientModule, TopBarComponent, LoginComponent],
+  imports: [
+    RouterOutlet,
+    HttpClientModule,
+    TopBarComponent,
+    LoginComponent,
+    CommonModule,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

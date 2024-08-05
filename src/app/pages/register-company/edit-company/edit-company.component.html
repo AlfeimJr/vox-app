@@ -71,7 +71,12 @@
     </section>
 
     <section class="buttons">
-      <vox-button color="secondary" text="Cancelar" size="medium"></vox-button>
+      <vox-button
+        color="secondary"
+        text="Cancelar"
+        size="medium"
+        (click)="goBack()"
+      ></vox-button>
       <vox-button
         color="primary"
         text="Salvar dados"

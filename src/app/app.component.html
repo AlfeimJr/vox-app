@@ -1,4 +1,4 @@
-@if( isLoggedIn ) {
+@if( isLoggedIn | async; as post) {
 <vox-top-bar></vox-top-bar>
 }
 <router-outlet></router-outlet>
