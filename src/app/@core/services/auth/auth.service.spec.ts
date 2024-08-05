@@ -6,6 +6,7 @@ import {
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from './auth.service';
 import { LoginComponent } from '../../../pages/login/login.component';
+import { User } from '../../Interfaces/user.interface';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -54,7 +55,7 @@ describe('AuthService', () => {
     const dummyUser = { id: 1, email: 'test@test.com' };
     const user = { email: 'test@test.com', password: 'password' };
 
-    service.register(user).subscribe((response) => {
+    service.register(user as User).subscribe((response) => {
       expect(response).toEqual(dummyUser);
     });
 

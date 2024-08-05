@@ -5,7 +5,7 @@ export interface Organization {
   typeOrganization: string;
   cnpj: string;
   uf: string;
-  userId: string;
+  userId: number;
   name: string;
   cpf: string;
   dateOfBirth: string;

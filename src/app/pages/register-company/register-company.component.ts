@@ -64,7 +64,7 @@ export class RegisterCompanyComponent implements OnInit {
     });
   }
 
-  private logCurrentRoute() {
+  logCurrentRoute() {
     let currentRoute = this.activatedRoute.root;
     let routePath = '';
 

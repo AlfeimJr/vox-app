@@ -160,9 +160,6 @@ export class EditCompanyComponent implements OnInit {
       this.organizationService
         .getOrganizationById(this.organizationId)
         .subscribe((organization) => {
-          console.log(organization);
-
-          // Populando os formulários com os dados recebidos
           this.userDateForm.patchValue({
             userId: organization.userId,
             name: organization.name,
